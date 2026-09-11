@@ -140,3 +140,10 @@ def test_force_is_cleared_after_integration():
     body.integrate(1)
 
     assert body.force == Vector2(0, 0)
+
+def test_acceleration_from_force_and_mass():
+    body = Body(Vector2(0, 0), mass=3, radius=1)
+    body.force = Vector2(12, 6)
+    body.integrate(1)
+
+    assert body.acceleration == Vector2(4, 2)
