@@ -35,16 +35,3 @@ class Body:
         self.previous_position = self.position
         self.position = new_position
         self.clear_forces()
-
-body = Body(Vector2(0, 0), 2, 5)
-
-body.apply_force(Vector2(10, 0))
-
-body.integrate(1)
-
-print(body.position)
-print(body.previous_position)
-print(body.acceleration)
-print(body.force)
-
-print(body.get_velocity(1))
