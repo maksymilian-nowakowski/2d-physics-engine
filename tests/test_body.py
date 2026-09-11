@@ -129,3 +129,14 @@ def test_integrate_with_initial_velocity_and_force():
     body.integrate(1)
 
     assert body.position == Vector2(25, 0)
+
+def test_force_is_cleared_after_integration():
+    body = Body(Vector2(0, 0), mass=1, radius=1)
+    body.force = Vector2(10, 0)
+    body.integrate(1)
+
+    assert body.force == Vector2(0, 0)
+
+    body.integrate(1)
+
+    assert body.force == Vector2(0, 0)
