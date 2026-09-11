@@ -95,4 +95,37 @@ def test_velocity_zero_dt():
     body = Body(Vector2(0, 0), mass=1, radius=1)
 
     with pytest.raises(ZeroDivisionError):
-        body.get_velocity(-1)
+        body.get_velocity(0)
+
+def test_integrate_without_force():
+    body = Body(Vector2(0, 0), mass=1, radius=1)
+    body.integrate(1)
+
+    assert body.position == Vector2(0, 0)
+    assert body.force == Vector2(0, 0)
+
+def test_integrate_with_constant_force():
+    body = Body(Vector2(0, 0), mass=2, radius=1)
+    body.force = Vector2(10, 0)
+    body.integrate(1)
+
+    assert body.acceleration == Vector2(5, 0)
+    assert body.position == Vector2(5, 0)
+    assert body.previous_position == Vector2(0, 0)
+    assert body.force == Vector2(0, 0)
+
+def test_integrate_with_initial_velocity():
+    body = Body(Vector2(10, 0), mass=1, radius=1)
+    body.previous_position = Vector2(0, 0)
+    body.integrate(1)
+
+    assert body.position == Vector2(20, 0)
+    assert body.previous_position == Vector2(10, 0)
+
+def test_integrate_with_initial_velocity_and_force():
+    body = Body(Vector2(10, 0), mass=2, radius=1)
+    body.previous_position = Vector2(0, 0)
+    body.force = Vector2(10, 0)
+    body.integrate(1)
+
+    assert body.position == Vector2(25, 0)
