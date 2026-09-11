@@ -147,3 +147,15 @@ def test_acceleration_from_force_and_mass():
     body.integrate(1)
 
     assert body.acceleration == Vector2(4, 2)
+
+def test_multiple_integrations():
+    body = Body(Vector2(0, 0), mass=1, radius=1)
+    body.force = Vector2(1, 0)
+    body.integrate(1)
+
+    assert body.position == Vector2(1, 0)
+
+    body.force = Vector2(1, 0)
+    body.integrate(1)
+
+    assert body.position == Vector2(3, 0)
