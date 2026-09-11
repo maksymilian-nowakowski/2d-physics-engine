@@ -18,3 +18,9 @@ def test_body_initialization():
     assert body.restitution == 0.7
     assert body.acceleration == Vector2(0, 0)
     assert body.force == Vector2(0, 0)
+
+def test_previous_position_is_independent():
+    body = Body(Vector2(0, 0), mass=1, radius=1)
+    body.position = Vector2(10, 20)
+
+    assert body.previous_position == Vector2(0, 0)
