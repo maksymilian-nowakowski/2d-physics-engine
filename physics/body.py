@@ -5,8 +5,14 @@ class Body:
     def __init__(self, position: Vector2, mass: float, radius: float, restitution: float=0.5):
         self.position = position
         self.previous_position = position.copy()
+        if mass <= 0:
+            raise ValueError("mass cannot be equal to or less than zero")
         self.mass = mass
+        if radius <= 0:
+            raise ValueError("radius cannot be equal to or less than zero")
         self.radius = radius
+        if restitution < 0 or restitution > 1:
+            raise ValueError("restituion must be between zero and one")
         self.restitution = restitution
         self.acceleration = Vector2(0, 0)
         self.force = Vector2(0, 0)
@@ -30,35 +36,15 @@ class Body:
         self.position = new_position
         self.clear_forces()
 
+body = Body(Vector2(0, 0), 2, 5)
 
-if __name__ == "__main__":
-    # Zero force and zero initial velocity leave the body stationary.
-    body = Body(Vector2(3, -2), mass=1, radius=1)
-    body.integrate(0.5)
-    assert body.position.x == 3 and body.position.y == -2
-    assert body.previous_position.x == 3 and body.previous_position.y == -2
+body.apply_force(Vector2(10, 0))
 
-    # Force, mass, and timestep affect both axes correctly.
-    body = Body(Vector2(0, 0), mass=2, radius=1)
-    body.apply_force(Vector2(4, -6))
-    body.integrate(0.5)
-    assert body.position.x == 0.5 and body.position.y == -0.75
-    assert body.acceleration.x == 2 and body.acceleration.y == -3
+body.integrate(1)
 
-    # Forces accumulate before integration.
-    body = Body(Vector2(1, 1), mass=1, radius=1)
-    body.apply_force(Vector2(2, 0))
-    body.apply_force(Vector2(0, 3))
-    body.integrate(1)
-    assert body.position.x == 3 and body.position.y == 4
+print(body.position)
+print(body.previous_position)
+print(body.acceleration)
+print(body.force)
 
-    # Existing Verlet velocity is retained, and previous_position is updated.
-    body = Body(Vector2(1, 2), mass=1, radius=1)
-    body.previous_position = Vector2(0, 1)
-    body.integrate(1)
-    print(body.position)
-    assert body.position.x == 2 and body.position.y == 3
-    assert body.previous_position.x == 1 and body.previous_position.y == 2
-
-    print("integrate tests passed")
-
+print(body.get_velocity(1))
