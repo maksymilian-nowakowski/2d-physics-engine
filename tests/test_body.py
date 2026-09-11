@@ -69,3 +69,30 @@ def test_clear_forces():
     body.clear_forces()
 
     assert body.force == Vector2(0, 0)
+
+def test_initial_velocity():
+    body = Body(Vector2(0, 0), mass=1, radius=1)
+
+    assert body.get_velocity(1) == Vector2(0, 0)
+
+def test_velocity_from_position_change():
+    body = Body(Vector2(0, 0), mass=1, radius=1)
+    body.previous_position = Vector2(0, 0)
+    body.position = Vector2(10, 5)
+
+    assert body.get_velocity(2) == Vector2(5, 2.5)
+
+def test_velocity_is_not_affected_by_get_velocity():
+    body = Body(Vector2(0, 0), mass=1, radius=1)
+    body.get_velocity(1)
+
+    assert body.position == Vector2(0, 0)
+    assert body.previous_position == Vector2(0, 0)
+    assert body.acceleration == Vector2(0, 0)
+    assert body.force == Vector2(0, 0)
+
+def test_velocity_zero_dt():
+    body = Body(Vector2(0, 0), mass=1, radius=1)
+
+    with pytest.raises(ZeroDivisionError):
+        body.get_velocity(-1)
