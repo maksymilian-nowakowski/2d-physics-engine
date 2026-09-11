@@ -17,13 +17,7 @@ class Body:
     def clear_forces(self):
         self.force = Vector2(0, 0)
 
-
-
-if __name__ == "__main__":
-    ball = Body(Vector2(0, 0), 1.0, 1.0)
-    print(ball.force)
-    ball.apply_force(Vector2(10, 0))
-    ball.apply_force(Vector2(5, 0))
-    print(ball.force)
-    ball.clear_forces()
-    print(ball.force)
+    def get_velocity(self, dt):
+        if dt <= 0:
+            raise ValueError("dt must be greater than zero")
+        return (self.position - self.previous_position) / dt
