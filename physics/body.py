@@ -1,4 +1,4 @@
-from physics.vector import Vector2
+from vector import Vector2
 
 
 class Body:
@@ -11,3 +11,13 @@ class Body:
         self.acceleration = Vector2(0, 0)
         self.force = Vector2(0, 0)
 
+    def apply_force(self, force):
+        self.force += force
+
+
+if __name__ == "__main__":
+    ball = Body(Vector2(0, 0), 1.0, 1.0)
+    print(ball.force)
+    ball.apply_force(Vector2(10, 0))
+    ball.apply_force(Vector2(5, 0))
+    print(ball.force)
