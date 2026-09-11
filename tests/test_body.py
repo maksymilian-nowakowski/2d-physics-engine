@@ -159,3 +159,31 @@ def test_multiple_integrations():
     body.integrate(1)
 
     assert body.position == Vector2(3, 0)
+
+def test_apply_force_does_not_modify_input():
+    body = Body(Vector2(0, 0), mass=1, radius=1)
+    force = Vector2(1, 0)
+    body.apply_force(force)
+    force = Vector2(2, 0)
+
+    assert body.force == Vector2(1, 0)
+
+def test_position_is_a_vector2():
+    body = Body(Vector2(0, 0), mass=1, radius=1)
+
+    assert isinstance(body.position, Vector2)
+
+def test_previous_position_is_a_vector2():
+    body = Body(Vector2(0, 0), mass=1, radius=1)
+
+    assert isinstance(body.previous_position, Vector2)
+
+def test_acceleration_is_a_vector2():
+    body = Body(Vector2(0, 0), mass=1, radius=1)
+
+    assert isinstance(body.acceleration, Vector2)
+
+def test_force_is_a_vector2():
+    body = Body(Vector2(0, 0), mass=1, radius=1)
+
+    assert isinstance(body.force, Vector2)

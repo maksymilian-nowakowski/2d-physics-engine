@@ -1,4 +1,4 @@
-from vector import Vector2
+from physics.vector import Vector2
 
 
 class Body:
