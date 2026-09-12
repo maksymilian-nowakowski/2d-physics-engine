@@ -45,3 +45,9 @@ def test_circles_are_colliding_diagonally():
     body_b = Body(Vector2(3, 4), mass=1, radius=1)
     
     assert check_circle_collision(body_a, body_b) == True
+
+def test_circles_at_same_position_are_colliding():
+    body_a = Body(Vector2(0, 0), mass=1, radius=5)
+    body_b = Body(Vector2(0, 0), mass=1, radius=5)
+
+    assert check_circle_collision(body_a, body_b) == True
