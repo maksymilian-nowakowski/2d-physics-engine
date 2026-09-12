@@ -51,3 +51,9 @@ def test_circles_at_same_position_are_colliding():
     body_b = Body(Vector2(0, 0), mass=1, radius=5)
 
     assert check_circle_collision(body_a, body_b) == True
+
+def test_body_cannot_collide_with_itself():
+    body = Body(Vector2(0, 0), mass=1, radius=5)
+
+    with pytest.raises(ValueError):
+        check_circle_collision(body, body)
