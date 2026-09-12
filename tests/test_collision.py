@@ -57,3 +57,17 @@ def test_body_cannot_collide_with_itself():
 
     with pytest.raises(ValueError):
         check_circle_collision(body, body)
+
+def test_invalid_first_body():
+    body_a = Vector2(0, 0)
+    body_b = Body(Vector2(10, 0), mass=1, radius=5)
+
+    with pytest.raises(ValueError):
+        check_circle_collision(body_a, body_b)
+
+def test_invalid_second_body():
+    body_a = Body(Vector2(0, 0), mass=1, radius=5)
+    body_b = Vector2(10, 0)
+
+    with pytest.raises(ValueError):
+        check_circle_collision(body_a, body_b)
