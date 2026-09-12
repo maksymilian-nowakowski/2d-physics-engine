@@ -71,3 +71,10 @@ def test_invalid_second_body():
 
     with pytest.raises(ValueError):
         check_circle_collision(body_a, body_b)
+
+def test_both_bodies_invalid():
+    body_a = Vector2(0, 0)
+    body_b = Vector2(10, 0)
+
+    with pytest.raises(ValueError):
+        check_circle_collision(body_a, body_b)
