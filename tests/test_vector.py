@@ -1,17 +1,9 @@
 import math
-import sys
-from pathlib import Path
 
 import pytest
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-
 from physics.vector import Vector2
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-# ─────────────────────────────────────────────
-# Construction / representation
-# ─────────────────────────────────────────────
 
 def test_vector_creation():
     vector = Vector2(3, 4)
@@ -25,10 +17,6 @@ def test_vector_repr():
 
     assert repr(vector) == "Vector2(3, 4)"
 
-
-# ─────────────────────────────────────────────
-# Arithmetic
-# ─────────────────────────────────────────────
 
 def test_vector_addition():
     a = Vector2(3, 4)
@@ -103,10 +91,6 @@ def test_vector_negation():
     assert result == Vector2(-3, 4)
 
 
-# ─────────────────────────────────────────────
-# Magnitude
-# ─────────────────────────────────────────────
-
 def test_vector_magnitude():
     vector = Vector2(3, 4)
 
@@ -130,10 +114,6 @@ def test_zero_vector_magnitude_squared():
 
     assert vector.magnitude_squared() == 0
 
-
-# ─────────────────────────────────────────────
-# Normalisation
-# ─────────────────────────────────────────────
 
 def test_vector_normalization():
     vector = Vector2(3, 4)
@@ -159,10 +139,6 @@ def test_normalizing_zero_vector():
         vector.normalized()
 
 
-# ─────────────────────────────────────────────
-# Dot product
-# ─────────────────────────────────────────────
-
 def test_dot_product():
     a = Vector2(3, 4)
     b = Vector2(2, 1)
@@ -184,10 +160,6 @@ def test_dot_product_with_zero_vector():
     assert a.dot(b) == 0
 
 
-# ─────────────────────────────────────────────
-# Distance
-# ─────────────────────────────────────────────
-
 def test_distance_between_vectors():
     a = Vector2(0, 0)
     b = Vector2(3, 4)
@@ -200,10 +172,6 @@ def test_distance_to_same_position():
 
     assert a.distance_to(a) == 0
 
-
-# ─────────────────────────────────────────────
-# Copy
-# ─────────────────────────────────────────────
 
 def test_vector_copy():
     original = Vector2(3, 4)
@@ -222,10 +190,6 @@ def test_modifying_copy_does_not_modify_original():
     assert original.x == 3
     assert copy.x == 10
 
-
-# ─────────────────────────────────────────────
-# Equality
-# ─────────────────────────────────────────────
 
 def test_equal_vectors():
     a = Vector2(3, 4)
@@ -253,3 +217,4 @@ def test_vectors_with_different_y_values_are_not_equal():
     b = Vector2(3, 5)
 
     assert a != b
+    

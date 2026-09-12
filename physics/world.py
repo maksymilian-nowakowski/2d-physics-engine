@@ -1,5 +1,5 @@
-from body import Body
-from vector import Vector2
+from physics.body import Body
+from physics.vector import Vector2
 
 
 class World:
@@ -26,10 +26,3 @@ class World:
         for body in self.bodies:
             body.apply_force(self.gravity * body.mass)
             body.integrate(dt)
-
-world = World(Vector2(0, 10))
-body = Body(Vector2(0, 0), mass=2, radius=1)
-
-world.add_body(body)
-world.step(1)
-print(body.acceleration)
