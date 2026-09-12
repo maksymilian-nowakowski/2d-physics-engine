@@ -32,8 +32,16 @@ def test_circle_inside_another_circle_is_colliding():
 
     assert check_circle_collision(body_a, body_b) == True
 
+
 def test_circles_with_different_radii():
     body_a = Body(Vector2(0, 0), mass=1, radius=3)
     body_b = Body(Vector2(7, 0), mass=1, radius=5)
 
+    assert check_circle_collision(body_a, body_b) == True
+
+
+def test_circles_are_colliding_diagonally():
+    body_a = Body(Vector2(0, 0), mass=1, radius=5)
+    body_b = Body(Vector2(3, 4), mass=1, radius=1)
+    
     assert check_circle_collision(body_a, body_b) == True
