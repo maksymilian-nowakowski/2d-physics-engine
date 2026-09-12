@@ -18,3 +18,18 @@ class World:
         if body not in self.bodies:
             raise ValueError("body isn't currently in the world")
         self.bodies.remove(body)
+
+    def clear(self):
+        self.bodies = []
+
+    def step(self, dt):
+        for body in self.bodies:
+            body.apply_force(self.gravity * body.mass)
+            body.integrate(dt)
+
+world = World(Vector2(0, 10))
+body = Body(Vector2(0, 0), mass=2, radius=1)
+
+world.add_body(body)
+world.step(1)
+print(body.acceleration)
