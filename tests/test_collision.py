@@ -23,3 +23,9 @@ def test_overlapping_circles_are_colliding():
     body_b = Body(Vector2(7, 0), mass=1, radius=5)
 
     assert check_circle_collision(body_a, body_b) == True
+
+def test_circle_inside_another_circle_is_colliding():
+    body_a = Body(Vector2(0, 0), mass=1, radius=10)
+    body_b = Body(Vector2(5, 0), mass=1, radius=2)
+
+    assert check_circle_collision(body_a, body_b) == True
